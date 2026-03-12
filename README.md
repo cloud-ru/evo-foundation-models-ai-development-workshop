@@ -132,34 +132,34 @@ $ cp env.example .env
 
 ```bash
 # Режим разработки с горячей перезагрузкой
-$ yarn run start:dev
+$ yarn start:dev
 
 # Режим отладки
-$ yarn run start:debug
+$ yarn start:debug
 
 # Сборка и запуск в продакшене
-$ yarn run build
-$ yarn run start:prod
+$ yarn build
+$ yarn start:prod
 ```
 
 ## Качество кода
 
 ```bash
 # Запуск линтинга
-$ yarn run lint
+$ yarn lint
 
 # Форматирование кода
-$ yarn run format
+$ yarn format
 
 # Сборка проекта
-$ yarn run build
+$ yarn build
 ```
 
 ## Разработка с Docker
 
 ```bash
 # Запуск MongoDB с помощью Docker Compose
-$ yarn run compose
+$ yarn compose
 
 # Просмотр логов MongoDB
 $ docker-compose logs mongodb
@@ -183,25 +183,10 @@ $ docker-compose down -v
 
 ```bash
 # Запуск MongoDB с помощью Docker Compose
-$ yarn run compose
+$ yarn compose
 
 # Запуск приложения в режиме разработки
-$ yarn run start:dev
-```
-
-### Ручное управление Docker
-
-Если вам нужен больший контроль над контейнерами Docker:
-
-```bash
-# Запуск сервиса MongoDB
-$ docker-compose up -d mongodb
-
-# Остановка сервиса MongoDB и удаление томов
-$ docker-compose down -v
-
-# Просмотр логов
-$ docker-compose logs mongodb
+$ yarn start:dev
 ```
 
 ### Конфигурация
