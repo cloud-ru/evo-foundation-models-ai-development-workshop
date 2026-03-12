@@ -1,0 +1,88 @@
+US-001 AI Sentiment Analisys
+
+As an authenticated application
+I want to send text messages to a configurable OpenAI-compatible LLM model and receive JSON responses that include an emotion score (pleasant | neutral | negative) and confidence level (0 - 1).
+So that I can embed intelligent sentimentware analisys in my product while retaining a complete audit trail of all exchanges.
+
+Description
+Adds a service layer that pulls BASE_URL, LLM_MODEL, LLM_API_TOKEN and API_TOKEN from environment variables, performs a chat/completions call, classifies the user text for sentiment, and returns a structured JSON payload.
+Every request-response pair is persisted in the database.
+App should authorize using API_TOKEN from .env using basic schema with X-Auth-Token token.
+
+Deliverables
+Middleware that validates bearer token
+Sentiment classifier API endpoint (openai LLM based) producing pleasant | neutral | negative
+
+Unified JSON output:
+
+json
+{
+  "messageId": "uuid",
+  "emotion": "pleasant | neutral | negative",
+  "confidence": "number",
+  "createdAt": "date-time"
+}
+Database persistence of the full prompt, response, emotion, confidence, latency, and http status
+
+Token-based auth guard reading X-Auth-Token header and matching against environment variables.
+
+Entities (JSON Schema snippets)
+json
+{
+  "ConversationMessage": {
+    "messageId": "uuid",
+    "requestText": "string",
+    "emotion": "string",
+    "confidence": "number",
+    "latencyMs": "number",
+    "statusCode": "integer",
+    "createdAt": "date-time",
+  }
+}
+API (OpenAPI 3.1 extract)
+text
+paths:
+  /ai/message:
+    post:
+      summary: Submit prompt and receive AI response
+      security:
+        - ApiTokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageRequest'
+      responses:
+        '200':
+          description: AI response returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+
+components:
+  securitySchemes:
+    ApiTokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+  schemas:
+    MessageRequest:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+          description: Plaintext prompt to pass to the LLM
+    MessageResponse:
+      type: object
+      required: [messageId, emotion, confidence createdAt]
+      properties:
+        messageId: { type: string, format: uuid }
+        emotion:
+          type: string
+          enum: [pleasant, neutral, negative]
+        emotion:
+          type: number
+        createdAt: { type: string, format: date-time }

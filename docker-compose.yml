@@ -1,0 +1,23 @@
+services:
+  mongodb:
+    image: mongo:6.0.14
+    container_name: nestjs-mongodb-test
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_test_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: nestjs_test
+
+  qdrant:
+    image: qdrant/qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+
+volumes:
+  mongodb_test_data:
+    driver: local
+  qdrant_storage:
