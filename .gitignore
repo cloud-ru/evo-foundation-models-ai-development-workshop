@@ -51,3 +51,9 @@ Thumbs.db
 
 # Test files
 test-results/
+
+# Reports
+reports/
+
+# Tsconfig
+*.tsbuildinfo

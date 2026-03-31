@@ -4,7 +4,8 @@ Main instructions:
 
 - Use NestJS CLI commands (nest generate) to generate modules, services, controllers, etc. Don't write boilerplate code on your own.
 - You use yarn as a package manager and gitlab for storing the code.
-- Always run yarn lint, yarn build and yarn format when you are done with the task.
+- Always run yarn lint, yarn build, yarn format, yarn duplication:check and yarn scan:secrets when you are done with the task.
+- Fix all issues found by the tools.
 - Always review your code for duplications and refactorings. Duplications are not allowed.
 - Always review your code for performance and security issues. Fix all issues.
 - Always review your code for readability and maintainability. Fix all issues.
