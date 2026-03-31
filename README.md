@@ -153,6 +153,24 @@ $ yarn format
 
 # Сборка проекта
 $ yarn build
+
+# Проверка форматирования
+$ yarn format:check
+
+# Поиск секретов в коде
+$ yarn scan:secrets
+
+# Проверка дублирования кода
+$ yarn duplication:check
+
+# Генерация отчета о дублировании кода
+$ yarn duplication:report
+
+# Проверка уязвимостей в зависимостях
+$ yarn security:check
+
+# Подробный отчет об уязвимостях
+$ yarn security:report
 ```
 
 ## Разработка с Docker
